@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import GitHub from './GitHub';
-import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Nav, Navbar } from 'react-bootstrap';
 import GitHubUser from './GitHubUser';
+
 
 class App extends Component {       
   render() {        
@@ -17,22 +18,21 @@ export default App;
 
 class Header extends Component {
   render(){
-    return (      
+    return (
         <BrowserRouter>
-          <div> 
-            <Navbar>
-              <Navbar.Header>
-                  <Navbar.Brand>
-                    React-Bootstrap
-                  </Navbar.Brand>
-              </Navbar.Header>  
-              <Nav>
-                <NavItem><Link to="/">Home</Link></NavItem>
-                <NavItem><Link to="/github">GitHub</Link></NavItem>
-              </Nav>
-            </Navbar>                              
-            <Switch>   
-              <Route path="/github/user/:login/:score" component={GitHubUser} />                                     
+          <div>            
+            <Navbar bg="light" expand="lg">
+              <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                  <Nav.Link href="/">Home</Nav.Link>
+                  <Nav.Link href="/github">GitHub</Nav.Link>                  
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+            <Switch> 
+              <Route path="/github/user/:login/:id" component={GitHubUser} />                                                                
               <Route path="/github" component={GitHub} />              
               <Route exact path="/" component={Home} />             
               <Route path="/*" component={NotFound} />                       
@@ -58,33 +58,3 @@ class NotFound extends Component {
     return <div>Not Found</div>
   }
 }
-//A <Router> may have only one child element
-
-/**
- * 
-
-import {requireAuth} from './RequireAuth';
- * 
- *         <BrowserRouter>
-          <div>    
-            <Navbar>
-              <Navbar.Header>
-                  <Navbar.Brand>
-                    <a href="#">React-Bootstrap</a>
-                  </Navbar.Brand>
-              </Navbar.Header>  
-              <Nav>
-                <NavItem><Link to="/">Home</Link></NavItem>
-                <NavItem><Link to="/github">GitHub</Link></NavItem>
-              </Nav>
-            </Navbar>                
-            <Switch>
-              <Route path="/github/user/:login/:score" component={GitHubUser} />                          
-              <Route path="/github" component={GitHub} />              
-              <Route exact path="/" component={Home} />             
-              <Route path="/*" component={NotFound} />                       
-            </Switch>   
-          </div>  
-        </BrowserRouter>  
- * 
- */
